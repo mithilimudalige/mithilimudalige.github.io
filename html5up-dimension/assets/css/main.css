@@ -1286,16 +1286,20 @@ input, select, textarea {
 			#header > :first-child:before {
 				display: none;
 			}
-
+   
 		#header .logo {
 			width: 5.5rem;
 			height: 5.5rem;
 			line-height: 5.5rem;
 			border: solid 1px #ffffff;
 			border-radius: 100%;
+			display: flex; 
+			justify-content: center; 
+			align-items: center;
+
 		}
 
-			#header .logo .icon:before {
+			#header .logo i:before {
 				font-size: 2rem;
 			}
 
