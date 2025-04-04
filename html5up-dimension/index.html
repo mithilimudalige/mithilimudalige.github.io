@@ -23,6 +23,27 @@
 	    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+ <!-- Python code button -->
+	    <style>
+	        /* Style for the "View Code" button */
+	        .code-button {
+	            padding: 10px;
+	            background-color: #007bff;
+	            color: white;
+	            border: none;
+	            cursor: pointer;
+	        }
+
+	        pre {
+	            margin-top: 20px;
+	        }
+
+	        /* Style for the hidden Python code */
+	        .code-section {
+	            display: none;
+	            margin-top: 20px;
+	        }
+	    </style>
 	</head>
 
 	<body class="is-preload">
@@ -68,6 +89,93 @@ href="#Graphics">Graphics</a></li>
 
     								<h3>VO2 and VE over Time</h3>
     									<img src="images/VO2_VE.png" alt="VO2 and VE Graphs" style="width:100%; max-width:800px; display:block; margin:auto;">
+							<!-- View Code Button -->
+					<button class="code-button" onclick="toggleCode()">View Code</button>
+
+					<!-- Python Code Section (hidden by default) -->
+					<div class="code-section" id="pythonCodeSection">
+						<pre><code class="language-python">
+import numpy as np 
+import pandas as pd 
+import matplotlib.pyplot as plt
+
+# Correct path to the CSV file located in the 'Data' folder within your repository
+df = pd.read_csv('Data/subject_1432.csv', header=[0], skiprows=[1,2,3])
+df = df.rename(columns={'VE/': 'VE/VO2','VE/.1': 'VE/VCO2'})
+
+x = df['VO2']
+y = df['FECO2']
+y1 = df['VCO2']
+
+fig, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 10))
+fig.subplots_adjust(hspace=0)
+
+ax[0].plot(x, y, 'o', label=('FECO2'), c='r' )
+
+ax[0].spines[['right', 'top']].set_visible(False)
+ax[0].set(ylabel=('%'))
+ax[0].legend()
+
+ax[1].plot(x, y1, 'o', label=('VCO2'), c='b')
+ax[1].spines[['right', 'top']].set_visible(False)
+ax[1].set(ylabel=('L/min'))
+ax[1].set(xlabel=('VO2(L/min)'))
+ax[1].legend()
+
+T1 = 1.7  
+T2 = 3.2     
+
+ax[0].axvline(T1, color='green', linestyle='--', label='T1', linewidth=2)
+ax[0].axvline(T2, color='orange', linestyle='--', label='T2', linewidth=2)
+
+ax[1].axvline(T1, color='green', linestyle='--', label='T1', linewidth=2)
+ax[1].axvline(T2, color='orange', linestyle='--', label='T2', linewidth=2)
+
+ax[0].text(T1 + 0.05, ax[0].get_ylim()[1] * 0.95, 'T1', color='green', fontsize=12)
+ax[0].text(T2 + 0.05, ax[0].get_ylim()[1] * 0.95, 'T2', color='orange', fontsize=12)
+
+fig.savefig("FECO2-VCO2-4.png", dpi=300, bbox_inches = "tight")
+fig.show()
+
+# VO2 and VE over Time
+df = pd.read_csv('Data/subject_1432.csv', header=[0], skiprows=[1,2,3])
+
+df = df.rename(columns={'VE/': 'VE/VO2','VE/.1': 'VE/VCO2'})
+
+x = df['TIME']
+y = df['VO2']
+y1 = df['VE']
+
+ymax = max(y)
+
+xmax = x[y.argmax()]
+
+fig, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 10)) 
+
+fig.subplots_adjust(hspace=0)
+
+ax[0].annotate('$\dot VO_2max$ =({}) L/min'.format(round(ymax, 2)), 
+               xy=(xmax, ymax), xytext=(xmax+.5, ymax+ .5),
+               arrowprops=dict(facecolor='red', shrink= 0.05),
+                )
+
+ax[0].plot(x, y, 'o', label=('$\dot VO_2$'), c='r' )
+
+ax[0].spines[['right', 'top']].set_visible(False)
+ax[0].set(ylabel=('L/min'))
+ax[0].legend()
+
+ax[1].plot(x, y1, 'o', label=('VE'), c='b')
+ax[1].spines[['top', 'right']].set_visible(False)
+ax[1].set(ylabel=('breaths/min'))
+ax[1].set(xlabel=('Time(min)'))
+ax[1].legend()
+
+fig.savefig("VO2-VE-4.png", dpi=300, bbox_inches = "tight")
+fig.show()
+						</code></pre>
+					</div>
+
 							</article>
 	
 						<!-- Graphics -->
@@ -346,6 +454,16 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+<script>
+	function toggleCode() {
+		var codeSection = document.getElementById("pythonCodeSection");
+		if (codeSection.style.display === "none" || codeSection.style.display === "") {
+			codeSection.style.display = "block";
+		} else {
+			codeSection.style.display = "none";
+		}
+	}
+</script>
 
 	</body>
 </html>
