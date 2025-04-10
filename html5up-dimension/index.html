@@ -23,7 +23,7 @@
 	    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
- <!-- Python code button -->
+ 	<!-- Python code button -->
 	    <style>
 	        /* Style for the "View Code" button */
 	        .code-button {
@@ -59,16 +59,13 @@
 						<div class="content">
 							<div class="inner">
 								<h1>KNEs 381 Portfolio</h1>
-								<p>Welcome to my portfolio, here you will 
-find a general overview on the things that I have learned in my Computer Applications in Kinesiology 
-class!</p>
+								<p>Welcome to my portfolio, here you willfind a general overview on the things that I have learned in my Computer Applications in Kinesiology class!</p>
 							</div>
 						</div>
 						<nav>
 							<ul>
 								<li><a href="#Python">Python</a></li>
-								<li><a 
-href="#Graphics">Graphics</a></li>
+								<li><a href="#Graphics">Graphics</a></li>
 								<li><a href="#Video">Video Anaysis</a></li>
 							
 								<!--<li><a href="#elements">Elements</a></li>-->
@@ -83,120 +80,119 @@ href="#Graphics">Graphics</a></li>
 							<article id="Python">
 								<h2 class="major">Python</h2>
 								<p>In this project, I used 
-Python to process and visualize VO₂ max data from a graded exercise test. which included 
-variables such as VO₂, VCO₂, FECO₂, VE, and TIME. In order to do so, I used libraries like 
-pandas for data manipulation and matplotlib to generate clear and informative plots that 
-revealed how these variables change over time and about each other. For example, I created 
-graphs showing VCO₂ and FECO₂ plotted against VO₂ to help identify ventilatory thresholds 
-and VO₂ and VE plotted over time to highlight peak oxygen uptake.
-Throughout this process, I learned how to clean and organize real-world physiological 
-data, interpret trends using visual tools, and connect coding with kinesiology concepts. 
-One of the most valuable parts of this experience was learning how to troubleshoot messy 
-data — like renaming inconsistent column headers — and building visualizations that 
-communicate what is happening in the body during exercise.
-Analyzing this type of data is crucial in the field of kinesiology. It provides insight 
-into cardiovascular performance and overall fitness. Understanding how to interpret these 
-patterns is important in athletic training and clinical applications. You can interact with 
-the code and try changing variables or outputs yourself 
-    <a href="https://www.kaggle.com/code/mithilimudalige/python-vo2-data-processing" 
-target="_blank" style="color:#ffd6e1; text-decoration: underline;">
-        on Kaggle here
-    </a>.
-</p>
+								Python to process and visualize VO₂ max data from a graded exercise test. which included 
+								variables such as VO₂, VCO₂, FECO₂, VE, and TIME. In order to do so, I used libraries like 
+								pandas for data manipulation and matplotlib to generate clear and informative plots that 
+								revealed how these variables change over time and about each other. For example, I created 
+								graphs showing VCO₂ and FECO₂ plotted against VO₂ to help identify ventilatory thresholds 
+								and VO₂ and VE plotted over time to highlight peak oxygen uptake.
+								Throughout this process, I learned how to clean and organize real-world physiological 
+								data, interpret trends using visual tools, and connect coding with kinesiology concepts. 
+								One of the most valuable parts of this experience was learning how to troubleshoot messy 
+								data — like renaming inconsistent column headers — and building visualizations that 
+								communicate what is happening in the body during exercise.
+								Analyzing this type of data is crucial in the field of kinesiology. It provides insight 
+								into cardiovascular performance and overall fitness. Understanding how to interpret these 
+								patterns is important in athletic training and clinical applications. You can interact with 
+								the code and try changing variables or outputs yourself 
+								    <a href="https://www.kaggle.com/code/mithilimudalige/python-vo2-data-processing" 
+								target="_blank" style="color:#ffd6e1; text-decoration: underline;">
+								        on Kaggle here
+								    </a>.
+								</p>
 
-								<p> Here are the results of my 
-analysis: </p>
+								<p> Here are the results of my analysis: </p>
     								<h3>FECO2 and VCO2 over VO2</h3>
     									<img src="images/FECO2_VCO2.png" alt="FECO2 and VCO2 Graphs" style="width:100%; max-width:800px; display:block; margin:auto;">
 
     								<h3>VO2 and VE over Time</h3>
     									<img src="images/VO2_VE.png" alt="VO2 and VE Graphs" style="width:100%; max-width:800px; display:block; margin:auto;">
 							<!-- View Code Button -->
-					<button class="code-button" onclick="toggleCode()">View Code</button>
-
-					<!-- Python Code Section -->
-					<div class="code-section" id="pythonCodeSection">
-						<pre><code class="language-python">
-import numpy as np 
-import pandas as pd 
-import matplotlib.pyplot as plt
-
-df = pd.read_csv('Data/subject_1432.csv', header=[0], skiprows=[1,2,3])
-df = df.rename(columns={'VE/': 'VE/VO2','VE/.1': 'VE/VCO2'})
-
-x = df['VO2']
-y = df['FECO2']
-y1 = df['VCO2']
-
-fig, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 10))
-fig.subplots_adjust(hspace=0)
-
-ax[0].plot(x, y, 'o', label=('FECO2'), c='r' )
-
-ax[0].spines[['right', 'top']].set_visible(False)
-ax[0].set(ylabel=('%'))
-ax[0].legend()
-
-ax[1].plot(x, y1, 'o', label=('VCO2'), c='b')
-ax[1].spines[['right', 'top']].set_visible(False)
-ax[1].set(ylabel=('L/min'))
-ax[1].set(xlabel=('VO2(L/min)'))
-ax[1].legend()
-
-T1 = 1.7  
-T2 = 3.2     
-
-ax[0].axvline(T1, color='green', linestyle='--', label='T1', linewidth=2)
-ax[0].axvline(T2, color='orange', linestyle='--', label='T2', linewidth=2)
-
-ax[1].axvline(T1, color='green', linestyle='--', label='T1', linewidth=2)
-ax[1].axvline(T2, color='orange', linestyle='--', label='T2', linewidth=2)
-
-ax[0].text(T1 + 0.05, ax[0].get_ylim()[1] * 0.95, 'T1', color='green', fontsize=12)
-ax[0].text(T2 + 0.05, ax[0].get_ylim()[1] * 0.95, 'T2', color='orange', fontsize=12)
-
-fig.savefig("FECO2-VCO2-4.png", dpi=300, bbox_inches = "tight")
-fig.show()
-
-# VO2 and VE over Time
-df = pd.read_csv('Data/subject_1432.csv', header=[0], skiprows=[1,2,3])
-
-df = df.rename(columns={'VE/': 'VE/VO2','VE/.1': 'VE/VCO2'})
-
-x = df['TIME']
-y = df['VO2']
-y1 = df['VE']
-
-ymax = max(y)
-
-xmax = x[y.argmax()]
-
-fig, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 10)) 
-
-fig.subplots_adjust(hspace=0)
-
-ax[0].annotate('$\dot VO_2max$ =({}) L/min'.format(round(ymax, 2)), 
-               xy=(xmax, ymax), xytext=(xmax+.5, ymax+ .5),
-               arrowprops=dict(facecolor='red', shrink= 0.05),
-                )
-
-ax[0].plot(x, y, 'o', label=('$\dot VO_2$'), c='r' )
-
-ax[0].spines[['right', 'top']].set_visible(False)
-ax[0].set(ylabel=('L/min'))
-ax[0].legend()
-
-ax[1].plot(x, y1, 'o', label=('VE'), c='b')
-ax[1].spines[['top', 'right']].set_visible(False)
-ax[1].set(ylabel=('breaths/min'))
-ax[1].set(xlabel=('Time(min)'))
-ax[1].legend()
-
-fig.savefig("VO2-VE-4.png", dpi=300, bbox_inches = "tight")
-fig.show()
-						</code></pre>
-					</div>
-
+								<button class="code-button" onclick="toggleCode()">View Code</button>
+			
+								<!-- Python Code Section -->
+								<div class="code-section" id="pythonCodeSection">
+									<pre><code class="language-python">
+									import numpy as np 
+									import pandas as pd 
+									import matplotlib.pyplot as plt
+									
+									df = pd.read_csv('Data/subject_1432.csv', header=[0], skiprows=[1,2,3])
+									df = df.rename(columns={'VE/': 'VE/VO2','VE/.1': 'VE/VCO2'})
+									
+									x = df['VO2']
+									y = df['FECO2']
+									y1 = df['VCO2']
+									
+									fig, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 10))
+									fig.subplots_adjust(hspace=0)
+									
+									ax[0].plot(x, y, 'o', label=('FECO2'), c='r' )
+									
+									ax[0].spines[['right', 'top']].set_visible(False)
+									ax[0].set(ylabel=('%'))
+									ax[0].legend()
+									
+									ax[1].plot(x, y1, 'o', label=('VCO2'), c='b')
+									ax[1].spines[['right', 'top']].set_visible(False)
+									ax[1].set(ylabel=('L/min'))
+									ax[1].set(xlabel=('VO2(L/min)'))
+									ax[1].legend()
+									
+									T1 = 1.7  
+									T2 = 3.2     
+									
+									ax[0].axvline(T1, color='green', linestyle='--', label='T1', linewidth=2)
+									ax[0].axvline(T2, color='orange', linestyle='--', label='T2', linewidth=2)
+									
+									ax[1].axvline(T1, color='green', linestyle='--', label='T1', linewidth=2)
+									ax[1].axvline(T2, color='orange', linestyle='--', label='T2', linewidth=2)
+									
+									ax[0].text(T1 + 0.05, ax[0].get_ylim()[1] * 0.95, 'T1', color='green', fontsize=12)
+									ax[0].text(T2 + 0.05, ax[0].get_ylim()[1] * 0.95, 'T2', color='orange', fontsize=12)
+									
+									fig.savefig("FECO2-VCO2-4.png", dpi=300, bbox_inches = "tight")
+									fig.show()
+									
+									# VO2 and VE over Time
+									df = pd.read_csv('Data/subject_1432.csv', header=[0], skiprows=[1,2,3])
+									
+									df = df.rename(columns={'VE/': 'VE/VO2','VE/.1': 'VE/VCO2'})
+									
+									x = df['TIME']
+									y = df['VO2']
+									y1 = df['VE']
+									
+									ymax = max(y)
+									
+									xmax = x[y.argmax()]
+									
+									fig, ax = plt.subplots(2, 1, sharex=True, figsize=(8, 10)) 
+									
+									fig.subplots_adjust(hspace=0)
+									
+									ax[0].annotate('$\dot VO_2max$ =({}) L/min'.format(round(ymax, 2)), 
+									               xy=(xmax, ymax), xytext=(xmax+.5, ymax+ .5),
+									               arrowprops=dict(facecolor='red', shrink= 0.05),
+									                )
+									
+									ax[0].plot(x, y, 'o', label=('$\dot VO_2$'), c='r' )
+									
+									ax[0].spines[['right', 'top']].set_visible(False)
+									ax[0].set(ylabel=('L/min'))
+									ax[0].legend()
+									
+									ax[1].plot(x, y1, 'o', label=('VE'), c='b')
+									ax[1].spines[['top', 'right']].set_visible(False)
+									ax[1].set(ylabel=('breaths/min'))
+									ax[1].set(xlabel=('Time(min)'))
+									ax[1].legend()
+									
+									fig.savefig("VO2-VE-4.png", dpi=300, bbox_inches = "tight")
+									fig.show()
+															</code></pre>
+														</div>
+									
 							</article>
 	
 						<!-- Graphics -->
@@ -205,68 +201,68 @@ fig.show()
 								<p> In this project, I learned how to use <strong>GIMP</strong>, a photo editing software, to enhance and transform images through a variety of techniques. I explored how to adjust colors to enhance readability and visual appeal, blend multiple images together seamlessly, and apply photo-editing tools to clean up and stylize pictures.
 								<p> Below are some examples of the outcomes I created through this process: </p>
 								<style>
-  .image-hover-container {
-    position: relative;
-    width: 65%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-
-  .image-hover-container img {
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: opacity 0.5s ease;
-  }
-
-  .image-hover-container .original {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: 1;
-  }
-
-  .image-hover-container:hover .original {
-    opacity: 1;
-  }
-
-  .image-hover-container:hover .edited {
-    opacity: 0;
-  }
-
-  .hover-label {
-    width: 100%;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #aaa;
-    font-style: italic;
-    margin-top: 0.5rem;
-  }
-
-  .gimp-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-  }
-</style>
-
-<div class="gimp-gallery">
-  <!-- Hover-to-reveal image -->
-  <div>
-    <div class="image-hover-container">
-      <img src="images/Colourcastchange.png" alt="Edited Image" class="edited">
-      <img src="images/colorcast1.jpg" alt="Original Image" class="original">
-    </div>
-    <p class="hover-label">Hover to reveal original</p>
-  </div>
-
-  <!-- Normal image -->
-  <img src="images/Imagemerge.png" alt="GIMP Edit 2" style="width: 65%; 
-border-radius: 8px;">
-</div>
+								  .image-hover-container {
+								    position: relative;
+								    width: 65%;
+								    border-radius: 8px;
+								    overflow: hidden;
+								    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+								  }
+								
+								  .image-hover-container img {
+								    display: block;
+								    width: 100%;
+								    height: auto;
+								    transition: opacity 0.5s ease;
+								  }
+								
+								  .image-hover-container .original {
+								    position: absolute;
+								    top: 0;
+								    left: 0;
+								    opacity: 0;
+								    z-index: 1;
+								  }
+								
+								  .image-hover-container:hover .original {
+								    opacity: 1;
+								  }
+								
+								  .image-hover-container:hover .edited {
+								    opacity: 0;
+								  }
+								
+								  .hover-label {
+								    width: 100%;
+								    text-align: center;
+								    font-size: 0.9rem;
+								    color: #aaa;
+								    font-style: italic;
+								    margin-top: 0.5rem;
+								  }
+								
+								  .gimp-gallery {
+								    display: flex;
+								    flex-wrap: wrap;
+								    gap: 20px;
+								    justify-content: center;
+								  }
+								</style>
+								
+								<div class="gimp-gallery">
+								  <!-- Hover-to-reveal image -->
+								  <div>
+								    <div class="image-hover-container">
+								      <img src="images/Colourcastchange.png" alt="Edited Image" class="edited">
+								      <img src="images/colorcast1.jpg" alt="Original Image" class="original">
+								    </div>
+								    <p class="hover-label">Hover to reveal original</p>
+								  </div>
+								
+								  <!-- Normal image -->
+								  <img src="images/Imagemerge.png" alt="GIMP Edit 2" style="width: 65%; 
+								border-radius: 8px;">
+								</div>
 
 							</article>
 
@@ -275,46 +271,46 @@ border-radius: 8px;">
 								<h2 class="major">Video Analysis</h2>
 								<p> In this project, I used <strong>Dartfish</strong> to perform 2D video analysis of athletic movement. I learned how to track movement patterns, measure joint angles, and time specific actions in order to better understand and evaluate athletic performance.</p>
 								<p> We also used Dartfish to 
-analyze gameplay footage. Using the tagging feature, I was able to mark important time points 
-such as key plays, transitions, and strategy moments. This process is especially useful for 
-team performance analysis and coaching feedback. However, I was unable to acquire my Dartfish 
-video, and so below you can see a similar video analysis done through Kinetic Lab and Canva.</p>
-							<div style="display: flex; 
-flex-direction: column; align-items: center; margin-top: 20px;">
-    <!-- Video -->
-    <video controls style="width: 80%; max-width: 800px; border-radius: 8px; margin-bottom: 
-15px;">
-        <source src="images/swim.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Collapsible Description -->
-    <details style="width: 80%; max-width: 800px; background-color: #000; color: #fff; 
-border-radius: 8px; padding: 15px;">
-        <summary style="cursor: pointer; font-size: 1.2em; font-weight: bold; color: #ffd6e1; 
-margin-bottom: 10px;">
-            View Description
-        </summary>
-        <div style="margin-top: 10px; font-size: 1em; line-height: 1.6;">
-            <p>
-                The first snapshot occurs at the entry point of the hand; this is one of the 
-most critical parts of a front crawl as it generates a large portion of the catch. As the hand 
-broke the water with minimal resistance and relaxed fingers throughout the swim, I noted this.
-            </p>
-            <p>
-                The second snapshot occurs at the later part of the hand movement, where the 
-swimmer is pulling the hand down. As she does this, her head comes up higher than is necessary 
-even if she is approaching the wall. This can lead to the legs sagging in the water and 
-increase resistance, so a note stating to tuck the chin in a bit more was added here.
-            </p>
-            <p>
-                The final snapshot occurred as the swimmer turned to breathe. Again, the head 
-was coming out of the water more than was necessary, increasing drag against her movement. A note 
-was also added here.
-            </p>
-        </div>
-    </details>
-</div>
+								analyze gameplay footage. Using the tagging feature, I was able to mark important time points 
+								such as key plays, transitions, and strategy moments. This process is especially useful for 
+								team performance analysis and coaching feedback. However, I was unable to acquire my Dartfish 
+								video, and so below you can see a similar video analysis done through Kinetic Lab and Canva.</p>
+															<div style="display: flex; 
+								flex-direction: column; align-items: center; margin-top: 20px;">
+								    <!-- Video -->
+								    <video controls style="width: 80%; max-width: 800px; border-radius: 8px; margin-bottom: 
+								15px;">
+								        <source src="images/swim.mp4" type="video/mp4">
+								        Your browser does not support the video tag.
+								    </video>
+								
+								    <!-- Collapsible Description -->
+								    <details style="width: 80%; max-width: 800px; background-color: #000; color: #fff; 
+								border-radius: 8px; padding: 15px;">
+								        <summary style="cursor: pointer; font-size: 1.2em; font-weight: bold; color: #ffd6e1; 
+								margin-bottom: 10px;">
+								            View Description
+								        </summary>
+								        <div style="margin-top: 10px; font-size: 1em; line-height: 1.6;">
+								            <p>
+								                The first snapshot occurs at the entry point of the hand; this is one of the 
+								most critical parts of a front crawl as it generates a large portion of the catch. As the hand 
+								broke the water with minimal resistance and relaxed fingers throughout the swim, I noted this.
+								            </p>
+								            <p>
+								                The second snapshot occurs at the later part of the hand movement, where the 
+								swimmer is pulling the hand down. As she does this, her head comes up higher than is necessary 
+								even if she is approaching the wall. This can lead to the legs sagging in the water and 
+								increase resistance, so a note stating to tuck the chin in a bit more was added here.
+								            </p>
+								            <p>
+								                The final snapshot occurred as the swimmer turned to breathe. Again, the head 
+								was coming out of the water more than was necessary, increasing drag against her movement. A note 
+								was also added here.
+								            </p>
+								        </div>
+								    </details>
+								</div>
 
 							</article>
 
