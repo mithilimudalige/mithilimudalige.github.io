@@ -3,7 +3,7 @@
 ## **Project Overview:**
 This website showcases the key concepts and skills I have learned in my Computer Applications in 
 Kinesiology class. It serves as both a portfolio of my progress and a resource for others 
-interested in applying technology to kinesiology.
+interested in applying technology to kinesiology!
 
 ## **Features:**
 - Displays various topics and skills learned
@@ -20,7 +20,7 @@ interested in applying technology to kinesiology.
 
 ## **How to Use the Website:**
 1. Navigate through different sections using the menu
-2. Click on interactive elements for demonstrations (if applicable)
+2. Click on interactive elements for demonstrations
 3. Explore embedded resources for deeper learning
 
 ## **Acknowledgments:**
